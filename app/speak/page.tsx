@@ -128,7 +128,7 @@ export default function SpeakPage() {
       </header>
 
       <section className="js-chat-shell">
-        {/* LEFT SIDE – description */}
+        {/* LEFT SIDE – description (hidden on mobile via CSS) */}
         <aside className="js-sidebar">
           <h2>James Conquest Yarrow</h2>
           <p>
@@ -142,7 +142,7 @@ export default function SpeakPage() {
           </p>
         </aside>
 
-              {/* RIGHT SIDE – chat */}
+        {/* RIGHT SIDE – chat */}
         <div className="js-chat-frame">
           <div className="js-chat-header">
             <div className="js-avatar" />
@@ -184,3 +184,7 @@ export default function SpeakPage() {
             </button>
           </form>
         </div>
+      </section>
+    </main>
+  );
+}
