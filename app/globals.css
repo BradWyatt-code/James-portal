@@ -494,6 +494,12 @@ main {
     height: calc(100vh - 64px); /* ~header height; tweak if needed */
   }
 
+.js-chat-frame {
+  overflow-x: hidden;
+}
+
+
+  
   /* Let the messages area expand and scroll naturally */
   .js-chat-log {
     flex: 1;
