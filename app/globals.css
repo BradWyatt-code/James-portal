@@ -468,3 +468,34 @@ main {
   }
 }
 
+/* ===== Mobile full-screen chat (WhatsApp-ish) ===== */
+@media (max-width: 899px) {
+  /* Make the page a vertical flex layout:
+     header at top, chat filling the rest */
+  .james-speak {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Chat shell takes all remaining height under header */
+  .js-chat-shell {
+    flex: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Chat frame becomes full-width, full-height under header */
+  .js-chat-frame {
+    margin: 0;
+    max-width: none;
+    border-radius: 0;
+    height: calc(100vh - 64px); /* ~header height; tweak if needed */
+  }
+
+  /* Let the messages area expand and scroll naturally */
+  .js-chat-log {
+    flex: 1;
+    max-height: none;
+    min-height: 0;
+  }
+}
