@@ -200,8 +200,7 @@ main {
     padding: 1.75rem 2rem;
     grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
 
-
-    /* ===== James Speak – shared ===== */
+/* ===== James Speak – shared ===== */
 
 .james-speak {
   position: relative;
@@ -341,8 +340,129 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: calc(100vh
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+}
 
+.js-msg {
+  max-width: 80%;
+  padding: 0.45rem 0.6rem 0.3rem;
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+.js-msg p {
+  margin: 0 0 0.15rem;
+}
+
+.js-msg-time {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  display: block;
+  text-align: right;
+}
+
+.js-msg-them {
+  align-self: flex-start;
+  background: #2a2420;
+  border-bottom-left-radius: 0.2rem;
+}
+
+.js-msg-me {
+  align-self: flex-end;
+  background: #3e3121;
+  border-bottom-right-radius: 0.2rem;
+}
+
+/* Input bar */
+.js-input-bar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.55rem 0.6rem;
+  border-top: 1px solid #3b3327;
+  background: #18141a;
+}
+
+.js-input {
+  flex: 1;
+  padding: 0.4rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid #464040;
+  background: #0f0d10;
+  color: #f3e7d4;
+  font-size: 0.85rem;
+}
+
+.js-input:focus {
+  outline: none;
+  border-color: #c3a870;
+}
+
+.js-send-btn {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #c3a870;
+  background: #c3a870;
+  color: #111013;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ===== Desktop layout overrides ===== */
+
+@media (min-width: 900px) {
+  /* Switch background to the wider pub scene for big screens */
+  .james-speak {
+    background-image: url("/images/pub.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .js-chat-shell {
+    min-height: calc(100vh - 68px);
+    padding: 2rem 4rem;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
+  .js-sidebar {
+    display: block;
+    max-width: 360px;
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: rgba(10, 9, 11, 0.9);
+    border: 1px solid rgba(92, 77, 55, 0.9);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+  }
+
+  .js-sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c3a870;
+  }
+
+  .js-sidebar p {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: #e4d5c0;
+  }
+
+  .js-sidebar-note {
+    font-size: 0.8rem;
+    color: #b09a75;
+  }
+
+  .js-chat-frame {
+    max-width: 430px;
+    transform: translateY(10px);
   }
 }
+
