@@ -389,6 +389,7 @@ main {
 
 .js-input {
   flex: 1;
+  min-width: 0; /* 👈 IMPORTANT: allow it to shrink inside flex */
   padding: 0.4rem 0.55rem;
   border-radius: 999px;
   border: 1px solid #464040;
@@ -396,6 +397,7 @@ main {
   color: #f3e7d4;
   font-size: 0.85rem;
 }
+
 
 .js-input:focus {
   outline: none;
