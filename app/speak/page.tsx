@@ -143,65 +143,45 @@ export default function SpeakPage() {
           </p>
         </aside>
 
-        {/* RIGHT SIDE – chat */}
+              {/* RIGHT SIDE – chat */}
         <div className="js-chat-frame">
-          {/* Wallpaper background */}
-          <div className="js-chat-bg">
-            <Image
-              src="/images/james-pub.png"
-              alt="Dim pub interior for James chat"
-              fill
-              priority
-              sizes="100vw"
-              className="js-chat-bg-img"
-            />
-            <div className="js-chat-bg-overlay" />
+          <div className="js-chat-header">
+            <div className="js-avatar" />
+            <div className="js-chat-title">
+              <span className="js-chat-name">James</span>
+              <span className="js-chat-status">last seen… elsewhere</span>
+            </div>
           </div>
 
-          {/* Foreground chat content */}
-          <div className="js-chat-inner">
-            <div className="js-chat-header">
-              <div className="js-avatar" />
-              <div className="js-chat-title">
-                <span className="js-chat-name">James</span>
-                <span className="js-chat-status">last seen… elsewhere</span>
-              </div>
-            </div>
-
-            <div className="js-chat-log">
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`js-msg ${
-                    msg.from === 'james' ? 'js-msg-them' : 'js-msg-me'
-                  }`}
-                >
-                  <p>{msg.text}</p>
-                  <span className="js-msg-time">{msg.time}</span>
-                </div>
-              ))}
-            </div>
-
-            <form className="js-input-bar" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Write to James..."
-                className="js-input"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                disabled={isSending}
-              />
-              <button
-                type="submit"
-                className="js-send-btn"
-                disabled={isSending}
+          <div className="js-chat-log">
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`js-msg ${
+                  msg.from === 'james' ? 'js-msg-them' : 'js-msg-me'
+                }`}
               >
-                {isSending ? 'Sending…' : 'Send'}
-              </button>
-            </form>
+                <p>{msg.text}</p>
+                <span className="js-msg-time">{msg.time}</span>
+              </div>
+            ))}
           </div>
+
+          <form className="js-input-bar" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Write to James..."
+              className="js-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={isSending}
+            />
+            <button
+              type="submit"
+              className="js-send-btn"
+              disabled={isSending}
+            >
+              {isSending ? 'Sending…' : 'Send'}
+            </button>
+          </form>
         </div>
-      </section>
-    </main>
-  );
-}
