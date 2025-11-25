@@ -33,14 +33,16 @@ export default function Home() {
               little sleep will let him remember.
             </p>
 
-            <div className="portal-links">
-              <a className="portal-btn" href="#letters">
-                View the Letters
-              </a>
-              <a className="portal-btn secondary" href="#speak">
-                Speak with James (coming soon)
-              </a>
-            </div>
+            
+<div className="portal-links">
+  <a className="portal-btn" href="#letters">
+    View the Letters
+  </a>
+  <a className="portal-btn secondary" href="/speak">
+    Speak with James
+  </a>
+</div>
+
           </div>
         </div>
       </section>
