@@ -499,3 +499,18 @@ main {
     min-height: 0;
   }
 }
+
+/* Extra padding for iPhone bottom bar – mobile chat */
+@media (max-width: 899px) {
+  .js-chat-frame {
+    /* full-width, full-height under header, with safe area padding */
+    margin: 0;
+    max-width: none;
+    border-radius: 0;
+    min-height: calc(100vh - 64px);
+  }
+
+  .js-input-bar {
+    padding-bottom: calc(0.55rem + env(safe-area-inset-bottom));
+  }
+}
