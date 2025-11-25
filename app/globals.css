@@ -199,6 +199,8 @@ main {
   .hero-card {
     padding: 1.75rem 2rem;
     grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+     }
+} /* closes the @media block */
 
 /* ===== James Speak – shared ===== */
 
