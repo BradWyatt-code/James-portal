@@ -31,6 +31,18 @@ const initialMessages: ChatMessage[] = [
   },
 ];
 
+ // should be wallpaper for mobile chat. Looks like WhatsApp
+<Image
+  src="/images/james-pub.png"
+  alt="Dim pub interior for James chat"
+  fill
+  priority
+  sizes="100vw"
+  className="object-cover"
+/>
+
+
+
 function toHistory(messages: ChatMessage[]) {
   // only send the last 10 exchanges to keep context reasonable
   return messages.slice(-10).map((m) => ({
