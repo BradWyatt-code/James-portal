@@ -522,3 +522,35 @@ main {
     padding-bottom: calc(0.55rem + env(safe-area-inset-bottom));
   }
 }
+
+/* FINAL mobile chat fixes */
+@media (max-width: 899px) {
+  /* Chat frame is exactly the viewport width, no more */
+  .js-chat-frame {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Input bar also locked to viewport width */
+  .js-input-bar {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Input is allowed to shrink */
+  .js-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Button must not collapse or vanish */
+  .js-send-btn {
+    flex-shrink: 0;
+  }
+}
+
