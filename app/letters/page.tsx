@@ -1,6 +1,17 @@
 // app/letters/page.tsx
 "use client";
 
+import { JamesNav } from "../components/JamesNav"; // or "../../components/JamesNav" depending on depth
+
+<header className="js-header">
+  <div className="js-header-title">
+    <span className="js-header-label">BW8 Studio</span>
+    <h1>Speak with James</h1>
+  </div>
+  <JamesNav current="speak" className="js-header-nav" />
+</header>
+
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
