@@ -1,4 +1,3 @@
-// app/letters/page.tsx
 "use client";
 
 import Image from "next/image";
@@ -6,55 +5,8 @@ import { useState } from "react";
 import { JamesNav } from "../../components/JamesNav";
 
 export default function LettersPage() {
-  const [letter, setLetter] = useState<string>("");
-  const [sketch, setSketch] = useState<string>("");
-  const [isLetterLoading, setIsLetterLoading] = useState(false);
-  const [isSketchLoading, setIsSketchLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleGenerateLetter() {
-    setIsLetterLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/james-letter", {
-        method: "POST",
-      });
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
-      const data = await res.json();
-      setLetter(data.letter ?? "");
-    } catch (err) {
-      console.error(err);
-      setError("James faltered at the page. Try again in a moment.");
-    } finally {
-      setIsLetterLoading(false);
-    }
-  }
-
-  async function handleGenerateSketch() {
-    setIsSketchLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/james-sketch", {
-        method: "POST",
-      });
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
-      const data = await res.json();
-      setSketch(data.sketch ?? "");
-    } catch (err) {
-      console.error(err);
-      setError("The pencil slipped. Try again in a moment.");
-    } finally {
-      setIsSketchLoading(false);
-    }
-  }
+  const [letterText, setLetterText] = useState<string>("");
+  const [sketchText, setSketchText] = useState<string>("");
 
   return (
     <main className="james-page">
@@ -91,42 +43,44 @@ export default function LettersPage() {
               <button
                 type="button"
                 className="portal-btn"
-                onClick={handleGenerateLetter}
-                disabled={isLetterLoading}
+                onClick={() =>
+                  setLetterText(
+                    "Sample Hong Kong field letter placeholder. We’ll wire this to the real API later."
+                  )
+                }
               >
-                {isLetterLoading ? "Writing…" : "Generate Letter"}
+                Generate Letter
               </button>
 
               <button
                 type="button"
                 className="portal-btn secondary"
-                onClick={handleGenerateSketch}
-                disabled={isSketchLoading}
+                onClick={() =>
+                  setSketchText(
+                    "Simple pencil sketch description placeholder—masts in the harbour, lantern light on wet stone."
+                  )
+                }
               >
-                {isSketchLoading ? "Drawing…" : "Generate Sketch"}
+                Generate Sketch
               </button>
             </div>
 
-            {error && (
-              <p style={{ color: "#ffb3b3", fontSize: "0.85rem" }}>{error}</p>
-            )}
-
             <div className="letters-output">
-              {letter && (
+              {letterText && (
                 <section className="letters-block">
                   <h3>Letter from Hong Kong</h3>
-                  <p>{letter}</p>
+                  <p>{letterText}</p>
                 </section>
               )}
 
-              {sketch && (
+              {sketchText && (
                 <section className="letters-block">
                   <h3>Pencil Sketch</h3>
-                  <p>{sketch}</p>
+                  <p>{sketchText}</p>
                 </section>
               )}
 
-              {!letter && !sketch && (
+              {!letterText && !sketchText && (
                 <p className="letters-placeholder">
                   Press a button above to call a letter or a sketch across from
                   the harbour.
@@ -138,10 +92,4 @@ export default function LettersPage() {
       </section>
 
       <footer className="site-footer">
-        <span>&copy; {new Date().getFullYear()} BW8 Studio</span>
-        <span>·</span>
-        <span>Clara &amp; James Portal</span>
-      </footer>
-    </main>
-  );
-}
+        <span>&copy; {new Date().get
