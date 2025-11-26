@@ -483,42 +483,67 @@ main {
 }
 
 /* ===== Mobile full-screen chat (WhatsApp-ish) ===== */
+/* ===== Mobile full-screen chat ===== */
 @media (max-width: 899px) {
-  /* Make the page a vertical flex layout:
-     header at top, chat filling the rest */
+  /* Lock everything to viewport */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   .james-speak {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
-  /* Chat shell takes all remaining height under header */
   .js-chat-shell {
     flex: 1;
     padding: 0;
     margin: 0;
+    width: 100%;
   }
 
-  /* Chat frame becomes full-width, full-height under header */
   .js-chat-frame {
     margin: 0;
-    max-width: none;
+    width: 100%;
+    max-width: 100%;
     border-radius: 0;
-    height: calc(100vh - 64px); /* ~header height; tweak if needed */
+    min-height: calc(100vh - 64px);
+    overflow-x: hidden;
   }
 
-.js-chat-frame {
-  overflow-x: hidden;
-}
-
-
-  
-  /* Let the messages area expand and scroll naturally */
   .js-chat-log {
     flex: 1;
-    max-height: none;
-    min-height: 0;
+    width: 100%;
+    overflow-x: hidden; /* KEY FIX */
+    padding: 0.75rem;
+  }
+
+  .js-msg {
+    max-width: 75%; /* Reduced from 80% for safety margin */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .js-input-bar {
+    width: 100%;
+    padding: 0.55rem 0.6rem;
+    padding-bottom: calc(0.55rem + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+  }
+
+  .js-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .js-send-btn {
+    flex-shrink: 0;
   }
 }
+
 
 /* Extra padding for iPhone bottom bar – mobile chat */
 @media (max-width: 899px) {
