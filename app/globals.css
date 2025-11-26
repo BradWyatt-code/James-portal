@@ -238,6 +238,13 @@ main {
   background: radial-gradient(circle at top, transparent 0, #000000e0 65%);
 }
 
+/* Lighter overlay on mobile so background is visible */
+@media (max-width: 899px) {
+  .js-overlay {
+    background: radial-gradient(circle at center, transparent 0, #00000080 70%);
+  }
+}
+
 .js-header {
   position: relative;
   z-index: 5;
@@ -503,6 +510,7 @@ main {
     border-radius: 0;
     min-height: calc(100vh - 64px);
     overflow-x: hidden;
+    background: rgba(10, 9, 11, 0.75); /* Lighter so pub shows through */
   }
 
   .js-chat-log {
