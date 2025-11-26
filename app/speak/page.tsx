@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
+import { JamesNav } from "../../components/JamesNav";
+
 
 type ChatMessage = {
   id: number;
