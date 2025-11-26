@@ -262,7 +262,7 @@ main {
 /* Even lighter overlay on mobile so background is visible */
 @media (max-width: 899px) {
   .js-overlay {
-    background: radial-gradient(circle at center, transparent 0, #00000030 80%);
+    background: radial-gradient(circle at center, transparent 0, #00000000 80%);
   }
 }
 
