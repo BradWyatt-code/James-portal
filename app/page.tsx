@@ -41,13 +41,17 @@ export default function Home() {
 
             
 <div className="portal-links">
-  <a className="portal-btn" href="#letters">
-    View the Letters
+  <a className="portal-btn" href="/his-story">
+    His Story
   </a>
   <a className="portal-btn secondary" href="/speak">
     Speak with James
   </a>
+  <a className="portal-btn secondary" href="#letters">
+    View the Letters
+  </a>
 </div>
+
 
           </div>
         </div>
