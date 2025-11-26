@@ -3,16 +3,22 @@ export default function Home() {
     <main className="james-page">
       <div className="overlay" />
 
-      <header className="site-header">
-        <div className="badge">BW8 Studio</div>
-        <nav className="nav-links">
-          <a href="https://clara.bw8.org" target="_blank" rel="noreferrer">
-            Clara
-          </a>
-          <span>·</span>
-          <span className="current">James</span>
-        </nav>
-      </header>
+      
+<header className="site-header">
+  <div className="badge">BW8 Studio</div>
+  <nav className="nav-links">
+    <span className="current">James</span>
+    <span>·</span>
+    <a href="/his-story">His Story</a>
+    <span>·</span>
+    <a href="/speak">Speak</a>
+    <span>·</span>
+    <a href="https://clara.bw8.org" target="_blank" rel="noreferrer">
+      Clara
+    </a>
+  </nav>
+</header>
+
 
       <section className="hero">
         <div className="hero-card">
