@@ -1,20 +1,9 @@
 // app/letters/page.tsx
 "use client";
 
-import { JamesNav } from "../components/JamesNav"; // or "../../components/JamesNav" depending on depth
-
-<header className="js-header">
-  <div className="js-header-title">
-    <span className="js-header-label">BW8 Studio</span>
-    <h1>Speak with James</h1>
-  </div>
-  <JamesNav current="speak" className="js-header-nav" />
-</header>
-
-
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
+import { JamesNav } from "../../components/JamesNav";
 
 export default function LettersPage() {
   const [letter, setLetter] = useState<string>("");
@@ -73,19 +62,7 @@ export default function LettersPage() {
 
       <header className="site-header">
         <div className="badge">BW8 Studio</div>
-        <nav className="nav-links">
-          <Link href="/">James</Link>
-          <span>·</span>
-          <Link href="/his-story">His Story</Link>
-          <span>·</span>
-          <Link href="/speak">Speak</Link>
-          <span>·</span>
-          <span className="current">Letters</span>
-          <span>·</span>
-          <a href="https://clara.bw8.org" target="_blank" rel="noreferrer">
-            Clara
-          </a>
-        </nav>
+        <JamesNav current="letters" className="nav-links" />
       </header>
 
       <section className="hero">
@@ -94,7 +71,7 @@ export default function LettersPage() {
           <div className="portrait-wrap">
             <Image
               src="/images/james-desk.png"
-              alt="James writing at a field desk"
+              alt="James writing at a desk"
               width={480}
               height={640}
             />
@@ -103,11 +80,11 @@ export default function LettersPage() {
           {/* Right: controls and output */}
           <div className="hero-text">
             <h1>Letters from Hong Kong</h1>
-            <h2>Dispatches & Pencil Sketches</h2>
+            <h2>Dispatches &amp; Pencil Sketches</h2>
 
             <p className="logline">
               At a small desk overlooking the harbour, James writes the letters
-              he never quite sends—and sketches the city as charcoal and fog.
+              he never quite sends—and sketches the city in charcoal and fog.
             </p>
 
             <div className="portal-links" style={{ marginBottom: "1rem" }}>
@@ -161,7 +138,9 @@ export default function LettersPage() {
       </section>
 
       <footer className="site-footer">
-        © {new Date().getFullYear()} BW8 Studio · James Conquest Yarrow
+        <span>&copy; {new Date().getFullYear()} BW8 Studio</span>
+        <span>·</span>
+        <span>Clara &amp; James Portal</span>
       </footer>
     </main>
   );
