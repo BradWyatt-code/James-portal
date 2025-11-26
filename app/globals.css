@@ -256,13 +256,13 @@ main {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at top, transparent 0, #000000e0 65%);
+  background: radial-gradient(circle at top, transparent 0, #00000040 80%); /* Much lighter overlay */
 }
 
-/* Lighter overlay on mobile so background is visible */
+/* Even lighter overlay on mobile so background is visible */
 @media (max-width: 899px) {
   .js-overlay {
-    background: radial-gradient(circle at center, transparent 0, #00000080 70%);
+    background: radial-gradient(circle at center, transparent 0, #00000030 80%);
   }
 }
 
