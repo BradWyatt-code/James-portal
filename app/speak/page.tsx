@@ -113,19 +113,18 @@ export default function SpeakPage() {
     <main className="james-speak">
       <div className="js-overlay" />
 
-      <header className="js-header">
-        <div className="js-header-title">
-          <span className="js-header-label">BW8 Studio</span>
-          <h1>Speak with James</h1>
-        </div>
-        <nav className="js-header-nav">
-          <Link href="/">Portal</Link>
-          <span>·</span>
-          <Link href="https://clara.bw8.org" target="_blank">
-            Clara
-          </Link>
-        </nav>
-      </header>
+  <nav className="js-header-nav">
+    <Link href="/">Portal</Link>
+    <span>·</span>
+    <Link href="/his-story">His Story</Link>
+    <span>·</span>
+    <span>Speak</span>
+    <span>·</span>
+    <Link href="https://clara.bw8.org" target="_blank">
+      Clara
+    </Link>
+  </nav>
+
 
       <section className="js-chat-shell">
         {/* LEFT SIDE – description (hidden on mobile via CSS) */}
