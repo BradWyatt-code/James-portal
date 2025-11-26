@@ -225,10 +225,30 @@ main {
   color: #f3e7d4;
   font-family: Georgia, "Times New Roman", serif;
   overflow: hidden;
+  background-image: url("/images/pub.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Fade in james-pub.png over pub.png */
+.james-speak::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-image: url("/images/james-pub.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  animation: fadein 2s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes fadein {
+  to {
+    opacity: 1;
+  }
 }
 
 .js-overlay {
@@ -306,21 +326,16 @@ main {
   width: 100%;
   max-width: 420px;
   border-radius: 1.25rem;
-  background: rgba(10, 9, 11, 0.88);
-  border: 1px solid rgba(92, 77, 55, 0.9);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+  background: transparent; /* Remove opaque background */
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .js-chat-header {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.75rem;
-  background: linear-gradient(to right, #25201b, #18151b);
-  border-bottom: 1px solid #3b3327;
+  display: none; /* Hide the chat header with avatar */
 }
 
 .js-avatar {
@@ -355,6 +370,7 @@ main {
   flex-direction: column;
   gap: 0.5rem;
   overflow-y: auto;
+  background: transparent; /* No background */
 }
 
 .js-msg {
@@ -367,6 +383,8 @@ main {
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
+  background: transparent; /* Remove background rectangles */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Add shadow for readability */
 }
 
 .js-msg p {
@@ -382,13 +400,11 @@ main {
 
 .js-msg-them {
   align-self: flex-start;
-  background: #2a2420;
   border-bottom-left-radius: 0.2rem;
 }
 
 .js-msg-me {
   align-self: flex-end;
-  background: #3e3121;
   border-bottom-right-radius: 0.2rem;
 }
 
@@ -396,8 +412,8 @@ main {
   display: flex;
   gap: 0.5rem;
   padding: 0.55rem 0.6rem;
-  border-top: 1px solid #3b3327;
-  background: #18141a;
+  border-top: none; /* Remove border */
+  background: transparent; /* Remove background */
 }
 
 .js-input {
