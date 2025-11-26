@@ -50,8 +50,8 @@ main {
   min-height: 100vh;
   font-family: Georgia, "Times New Roman", serif;
   color: #f3e7d4;
-  background-color: #111013;
-  background-image: radial-gradient(circle at top, #22202a, #050407 70%);
+  background-color: #1a1820; /* Lighter background color */
+  background-image: radial-gradient(circle at top, #2e2a38, #0f0d12 70%); /* Lighter gradient */
 }
 
 .james-page .overlay {
