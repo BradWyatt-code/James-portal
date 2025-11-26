@@ -58,7 +58,7 @@ main {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at top, transparent 0, #000000aa 70%);
+  background: radial-gradient(circle at top, transparent 0, #00000030 70%); /* Much lighter */
 }
 
 .site-header {
@@ -229,7 +229,7 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(2.5); /* Brighten the background images */
+  filter: brightness(1.4); /* Brighten the background images */
 }
 
 /* Fade in james-pub.png over pub.png */
@@ -262,7 +262,7 @@ main {
 /* Even lighter overlay on mobile so background is visible */
 @media (max-width: 899px) {
   .js-overlay {
-    background: radial-gradient(circle at center, transparent 0, #00000000 80%);
+    background: radial-gradient(circle at center, transparent 0, #00000030 80%);
   }
 }
 
