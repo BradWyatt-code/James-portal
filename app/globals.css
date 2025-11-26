@@ -251,6 +251,18 @@ main {
   text-transform: uppercase;
 }
 
+.js-msg {
+  max-width: 80%;
+  padding: 0.45rem 0.6rem 0.3rem;
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  position: relative;
+  word-wrap: break-word;      /* ADD */
+  overflow-wrap: break-word;  /* ADD */
+  word-break: break-word;     /* ADD */
+}
+
 .js-header-label {
   font-size: 0.7rem;
   letter-spacing: 0.16em;
