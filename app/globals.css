@@ -229,7 +229,7 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(1.4); /* Brighten the background images */
+  filter: brightness(2.5); /* Brighten the background images */
 }
 
 /* Fade in james-pub.png over pub.png */
