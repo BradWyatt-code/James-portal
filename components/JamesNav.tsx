@@ -3,7 +3,7 @@ import Link from "next/link";
 
 type JamesNavProps = {
   current: "home" | "speak" | "his-story" | "letters";
-  className?: string; // lets us use it with .nav-links or .js-header-nav
+  className?: string;
 };
 
 export function JamesNav({ current, className }: JamesNavProps) {
