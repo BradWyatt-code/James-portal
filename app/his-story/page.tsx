@@ -7,16 +7,16 @@ export default function HisStoryPage() {
     <main className="james-page">
       <div className="overlay" />
 
-      <header className="site-header">
-        <div className="badge">BW8 Studio</div>
-        <nav className="nav-links">
-          <Link href="/">Portal</Link>
-          <span>·</span>
-          <Link href="/speak">Speak</Link>
-          <span>·</span>
-          <span className="current">His Story</span>
-        </nav>
-      </header>
+import { JamesNav } from "../components/JamesNav"; // or "../../components/JamesNav" depending on depth
+
+<header className="js-header">
+  <div className="js-header-title">
+    <span className="js-header-label">BW8 Studio</span>
+    <h1>Speak with James</h1>
+  </div>
+  <JamesNav current="speak" className="js-header-nav" />
+</header>
+
 
       <section className="hero">
         <div className="hero-card">
