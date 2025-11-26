@@ -556,3 +556,33 @@ main {
     flex-shrink: 0;
   }
 }
+
+.letters-output {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: rgba(10, 9, 11, 0.82);
+  border: 1px solid rgba(92, 77, 55, 0.8);
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.letters-block + .letters-block {
+  margin-top: 1rem;
+}
+
+.letters-block h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #c3a870;
+}
+
+.letters-block p,
+.letters-placeholder {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e4d5c0;
+}
