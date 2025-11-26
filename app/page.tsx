@@ -1,17 +1,16 @@
+// app/page.tsx
+import { JamesNav } from "../components/JamesNav";
+
 export default function Home() {
   return (
     <main className="james-page">
       <div className="overlay" />
 
-      
-import { JamesNav } from "../components/JamesNav";
+      <header className="site-header">
+        <div className="badge">BW8 Studio</div>
+        <JamesNav current="home" className="nav-links" />
+      </header>
 
-<header className="site-header">
-  <div className="badge">BW8 Studio</div>
-  <JamesNav current="home" className="nav-links" />
-</header>
-
-      
       <section className="hero">
         <div className="hero-card">
           <div className="portrait-wrap">
@@ -31,20 +30,17 @@ import { JamesNav } from "../components/JamesNav";
               little sleep will let him remember.
             </p>
 
-            
-<div className="portal-links">
-  <a className="portal-btn" href="/his-story">
-    His Story
-  </a>
-  <a className="portal-btn secondary" href="/speak">
-    Speak with James
-  </a>
-  <a className="portal-btn secondary" href="#letters">
-    View the Letters
-  </a>
-</div>
-
-
+            <div className="portal-links">
+              <a className="portal-btn" href="/his-story">
+                His Story
+              </a>
+              <a className="portal-btn secondary" href="/speak">
+                Speak with James
+              </a>
+              <a className="portal-btn secondary" href="/letters">
+                View the Letters
+              </a>
+            </div>
           </div>
         </div>
       </section>
