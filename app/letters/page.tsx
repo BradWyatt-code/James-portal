@@ -92,4 +92,10 @@ export default function LettersPage() {
       </section>
 
       <footer className="site-footer">
-        <span>&copy; {new Date().get
+        <span>&copy; {new Date().getFullYear()} BW8 Studio</span>
+        <span>·</span>
+        <span>Clara &amp; James Portal</span>
+      </footer>
+    </main>
+  );
+}
