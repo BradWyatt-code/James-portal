@@ -21,7 +21,7 @@ export default function LettersPage() {
         <div className="hero-card">
           {/* Left: desk image */}
           <div className="portrait-wrap">
-            <Image
+            <Image>
               src="images/james-desk.png"
               alt="James writing at a desk"
               width={480}
