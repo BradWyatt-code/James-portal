@@ -52,7 +52,7 @@ export default function LettersPage() {
           {/* Left: desk image */}
           <div className="portrait-wrap">
             <img
-              src="/images/james-desk.png"
+              src="/images/James-desk.png"
               alt="James writing at a desk"
               style={{ width: '100%', maxWidth: '320px', borderRadius: '1rem', border: '1px solid #4a4338' }}
             />
@@ -71,17 +71,17 @@ export default function LettersPage() {
                 type="button"
                 className="portal-btn"
                 onClick={handleGenerateLetter}
-                disabled={loading}
+                disabled={letterLoading}
               >
-                {loading ? "Generating..." : "Generate Letter"}
+                {letterLoading ? "Generating..." : "Generate Letter"}
               </button>
               <button
                 type="button"
                 className="portal-btn secondary"
                 onClick={handleGenerateSketch}
-                disabled={loading}
+                disabled={sketchLoading}
               >
-                {loading ? "Generating..." : "Generate Sketch"}
+                {sketchLoading ? "Generating..." : "Generate Sketch"}
               </button>
             </div>
             <div className="letters-output">
