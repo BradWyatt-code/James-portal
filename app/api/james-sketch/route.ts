@@ -17,15 +17,14 @@ export async function POST() {
     const image = await client.images.generate({
       model: "gpt-image-1",
       prompt:
-        "Monochrome pencil sketch, 1840s style, of the harbor of Hong Kong at dusk " +
+        "Monochrome pencil sketch, 1840s engraving style, of the harbour of Hong Kong at dusk " +
         "seen from a British military encampment. Tents, harbour waterline, sailing junks, " +
         "mountain silhouettes in the distance, everything rendered with graphite pencil texture, " +
-        "no color, just shading and line work.",
+        "no colour, just shading and line work.",
       size: "1024x1024",
       response_format: "b64_json",
     });
 
-    // ✅ Safely handle image.data for TypeScript
     const b64 =
       Array.isArray(image.data) && image.data.length > 0
         ? image.data[0].b64_json
