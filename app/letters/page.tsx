@@ -52,7 +52,7 @@ export default function LettersPage() {
           {/* Left: desk image */}
           <div className="portrait-wrap">
             <img
-              src="/images/James-desk.png"
+              src="/images/james-desk.png"
               alt="James writing at a desk"
               style={{ width: '100%', maxWidth: '320px', borderRadius: '1rem', border: '1px solid #4a4338' }}
             />
