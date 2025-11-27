@@ -5,10 +5,11 @@ import { JamesNav } from "../../components/JamesNav";
 export default function LettersPage() {
   const [letterText, setLetterText] = useState<string>("");
   const [sketchText, setSketchText] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+  const [letterLoading, setLetterLoading] = useState(false);
+  const [sketchLoading, setSketchLoading] = useState(false);
 
   const handleGenerateLetter = async () => {
-    setLoading(true);
+    setLetterLoading(true);
     try {
       const res = await fetch("/api/james-letter", {
         method: "POST",
@@ -19,12 +20,12 @@ export default function LettersPage() {
       console.error(err);
       setLetterText("Error generating letter.");
     } finally {
-      setLoading(false);
+      setLetterLoading(false);
     }
   };
 
   const handleGenerateSketch = async () => {
-    setLoading(true);
+    setSketchLoading(true);
     try {
       const res = await fetch("/api/james-sketch", {
         method: "POST",
@@ -35,7 +36,7 @@ export default function LettersPage() {
       console.error(err);
       setSketchText("Error generating sketch.");
     } finally {
-      setLoading(false);
+      setSketchLoading(false);
     }
   };
 
