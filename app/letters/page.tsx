@@ -16,10 +16,17 @@ export default function LettersPage() {
         method: "POST",
       });
       const data = await res.json();
+      
+      if (!res.ok) {
+        console.error("API Error:", data);
+        setLetterText(`Error: ${data.error || "Failed to generate letter"}`);
+        return;
+      }
+      
       setLetterText(data.letter || "No letter generated.");
     } catch (err) {
-      console.error(err);
-      setLetterText("Error generating letter.");
+      console.error("Fetch error:", err);
+      setLetterText("Error: Could not connect to API.");
     } finally {
       setLetterLoading(false);
     }
