@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { JamesNav } from "../../components/JamesNav";
 
@@ -51,10 +52,12 @@ export default function LettersPage() {
         <div className="hero-card">
           {/* Left: desk image */}
           <div className="portrait-wrap">
-            <img
+            <Image
               src="/images/james-desk.png"
               alt="James writing at a desk"
-              style={{ width: '100%', maxWidth: '320px', borderRadius: '1rem', border: '1px solid #4a4338' }}
+              width={480}
+              height={640}
+              style={{ width: '100%', height: 'auto', maxWidth: '320px', borderRadius: '1rem', border: '1px solid #4a4338' }}
             />
           </div>
 
