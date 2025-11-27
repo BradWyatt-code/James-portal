@@ -5,33 +5,41 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const JAMES_SYSTEM_PROMPT = `
-You are James Yarrow, a 28-year-old veteran officer in 1843, with the habits and perspective described previously. You are not an art critic; you sketch quickly in pencil, noting composition, light, and small details that matter to you.
-`;
-
 export async function POST() {
   try {
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini", // FIXED: was "gpt-4.1-mini"
-      messages: [
-        { role: "system", content: JAMES_SYSTEM_PROMPT },
-        {
-          role: "user",
-          content:
-            "Describe a simple pencil drawing James might make in Hong Kong around 1841. Keep it to one short paragraph. Focus on what is on the page: rough lines, composition, where the harbour sits, what figures or ships appear, and any small detail that betrays his state of mind. Do not write a story, only describe the drawing as if someone is looking at the sketch on the desk.",
-        },
-      ],
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json(
+        { error: "Missing OPENAI_API_KEY" },
+        { status: 500 }
+      );
+    }
+
+    const image = await client.images.generate({
+      model: "gpt-image-1",
+      prompt:
+        "Monochrome pencil sketch, 1840s style, of the harbor of Hong Kong at dusk " +
+        "seen from a British military encampment. Tents, harbor waterline, sailing junks, " +
+        "mountain silhouettes in the distance, everything rendered with graphite pencil texture, " +
+        "no color, just shading and line work.",
+      size: "1024x1024",
+      response_format: "b64_json",
     });
 
-    const sketch =
-      completion.choices[0]?.message?.content ??
-      "A faint suggestion of masts and rooftops, abandoned halfway through.";
+    const b64 = image.data[0]?.b64_json;
 
-    return NextResponse.json({ sketch });
+    if (!b64) {
+      return NextResponse.json(
+        { error: "No image data returned from model" },
+        { status: 500 }
+      );
+    }
+
+    // Return base64 string – frontend will wrap it in data URL
+    return NextResponse.json({ image: b64 });
   } catch (err) {
-    console.error("James sketch API error:", err);
+    console.error("Error generating James sketch:", err);
     return NextResponse.json(
-      { error: "Failed to generate sketch description." },
+      { error: "Failed to generate sketch image" },
       { status: 500 }
     );
   }
