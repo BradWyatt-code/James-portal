@@ -1,4 +1,3 @@
-// app/api/james-sketch/route.ts
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -13,7 +12,7 @@ You are James Yarrow, a 28-year-old veteran officer in 1843, with the habits and
 export async function POST() {
   try {
     const completion = await client.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-4o-mini", // FIXED: was "gpt-4.1-mini"
       messages: [
         { role: "system", content: JAMES_SYSTEM_PROMPT },
         {
