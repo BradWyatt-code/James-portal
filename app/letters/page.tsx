@@ -20,14 +20,14 @@ export default function LettersPage() {
       <section className="hero">
         <div className="hero-card">
           {/* Left: desk image */}
-          <div className="portrait-wrap">
-            <Image>
-              src="images/james-desk.png"
-              alt="James writing at a desk"
-              width={480}
-              height={640}
-            />
-          </div>
+<div className="portrait-wrap">
+  <Image
+    src="/images/james-desk.png"
+    alt="James writing at a desk"
+    width={480}
+    height={640}
+  />
+</div>
 
           {/* Right: controls and output */}
           <div className="hero-text">
