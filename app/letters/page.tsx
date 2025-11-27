@@ -20,12 +20,12 @@ export default function LettersPage() {
       <section className="hero">
         <div className="hero-card">
           {/* Left: desk image */}
+
 <div className="portrait-wrap">
-  <Image
+  <img
     src="/images/james-desk.png"
     alt="James writing at a desk"
-    width={480}
-    height={640}
+    style={{ width: '100%', maxWidth: '320px' }}
   />
 </div>
 
