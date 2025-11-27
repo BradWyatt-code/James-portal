@@ -18,14 +18,18 @@ export async function POST() {
       model: "gpt-image-1",
       prompt:
         "Monochrome pencil sketch, 1840s style, of the harbor of Hong Kong at dusk " +
-        "seen from a British military encampment. Tents, harbor waterline, sailing junks, " +
+        "seen from a British military encampment. Tents, harbour waterline, sailing junks, " +
         "mountain silhouettes in the distance, everything rendered with graphite pencil texture, " +
         "no color, just shading and line work.",
       size: "1024x1024",
       response_format: "b64_json",
     });
 
-    const b64 = image.data[0]?.b64_json;
+    // ✅ Safely handle image.data for TypeScript
+    const b64 =
+      Array.isArray(image.data) && image.data.length > 0
+        ? image.data[0].b64_json
+        : undefined;
 
     if (!b64) {
       return NextResponse.json(
@@ -34,7 +38,6 @@ export async function POST() {
       );
     }
 
-    // Return base64 string – frontend will wrap it in data URL
     return NextResponse.json({ image: b64 });
   } catch (err) {
     console.error("Error generating James sketch:", err);
