@@ -1,39 +1,37 @@
-import type { Metadata, Viewport } from "next";
+// app/layout.tsx
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { JamesNav } from "@/components/JamesNav";
 
 const geistSans = Geist({
+  subsets: ["latin"],
   variable: "--font-geist-sans",
-  subsets: ["latin"],
 });
-
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
-  title: "James Portal - BW8 Studio",
-  description: "James Conquest Yarrow - Late of Her Majesty's Cavalry",
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  title: "James Conquest Yarrow",
+  description: "BW8 Studio – James portal",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {/* GLOBAL HEADER – same on every page */}
+        <header className="site-header">
+          <div className="badge">BW8 Studio</div>
+          <JamesNav />
+        </header>
+
         {children}
       </body>
     </html>
