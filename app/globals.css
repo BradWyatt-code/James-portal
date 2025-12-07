@@ -446,28 +446,66 @@ main {
   white-space: nowrap;
 }
 
-/* ===== Desktop layout ========================== */
+
+/* ===== Desktop layout ===== */
 
 @media (min-width: 900px) {
   .james-speak {
     background-image: url("/images/pub.png");
     background-size: cover;
-    background-position: center;
+    background-position: center top; /* pull his head into frame */
   }
 
-@media (min-width: 900px) {
-  .james-speak {
-    background-image: url("/images/pub.png");
-    background-size: cover;
-
-    /* key change */
-    background-position: center top;
-  }
-
+  /* Make sure the fade layer is aimed the same way on desktop */
   .james-speak::before {
-    /* same image + fade, just re-aim it on desktop */
     background-position: center top; /* or try center 15% if you want lower */
   }
+
+  .js-chat-shell {
+    min-height: calc(100vh - 68px);
+    padding: 2rem 4rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
+  .js-sidebar {
+    display: block;
+    max-width: 360px;
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: rgba(10, 9, 11, 0.9);
+    border: 1px solid rgba(92, 77, 55, 0.9);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+  }
+
+  .js-sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c3a870;
+  }
+
+  .js-sidebar p {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: #e4d5c0;
+  }
+
+  .js-sidebar-note {
+    font-size: 0.8rem;
+    color: #b09a75;
+  }
+
+  .js-chat-frame {
+    max-width: 430px;
+    transform: translateY(10px);
+  }
+}
+
 
 
 
