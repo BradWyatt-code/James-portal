@@ -230,8 +230,10 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(2.5); /* Brighten the background images */
+  /* kill the floodlight */
+  filter: brightness(1.05);
 }
+
 
 /* Fade in james-pub.png over pub.png */
 .james-speak::before {
