@@ -1,5 +1,5 @@
 // app/page.tsx
-import { JamesNav } from "../../components/JamesNav";
+import { JamesNav } from "../components/JamesNav";
 
 
 export default function Home() {
