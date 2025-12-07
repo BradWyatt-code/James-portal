@@ -1,25 +1,16 @@
 // components/JamesNav.tsx
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 type JamesNavProps = {
+  current?: "home" | "speak" | "his-story" | "letters"; // <-- put this back, make it optional
   className?: string;
 };
 
-export function JamesNav({ className = "nav-links" }: JamesNavProps) {
-  const pathname = usePathname();
-
-  const isCurrent = (path: string | string[]) => {
-    const paths = Array.isArray(path) ? path : [path];
-    return paths.includes(pathname);
-  };
-
+export function JamesNav({ current, className }: JamesNavProps) {
   return (
-    <nav className={className}>
+    <nav className={className ?? "nav-links"}>
       {/* Home / James portal */}
-      {isCurrent("/") ? (
+      {current === "home" ? (
         <span className="current">James</span>
       ) : (
         <Link href="/">James</Link>
@@ -28,7 +19,7 @@ export function JamesNav({ className = "nav-links" }: JamesNavProps) {
       <span>·</span>
 
       {/* His Story */}
-      {isCurrent("/his-story") ? (
+      {current === "his-story" ? (
         <span className="current">His Story</span>
       ) : (
         <Link href="/his-story">His Story</Link>
@@ -37,7 +28,7 @@ export function JamesNav({ className = "nav-links" }: JamesNavProps) {
       <span>·</span>
 
       {/* Speak */}
-      {isCurrent("/speak") ? (
+      {current === "speak" ? (
         <span className="current">Speak</span>
       ) : (
         <Link href="/speak">Speak</Link>
@@ -46,7 +37,7 @@ export function JamesNav({ className = "nav-links" }: JamesNavProps) {
       <span>·</span>
 
       {/* Letters */}
-      {isCurrent("/letters") ? (
+      {current === "letters" ? (
         <span className="current">Letters</span>
       ) : (
         <Link href="/letters">Letters</Link>
