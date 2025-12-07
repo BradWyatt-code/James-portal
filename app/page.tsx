@@ -1,5 +1,21 @@
-// app/page.tsx
-import { JamesNav } from "../components/JamesNav";
+
+export default function SpeakPage() {
+  return (
+    <main className="james-speak">
+      <div className="js-overlay" />
+
+      <header className="site-header">
+        <div className="badge">BW8 Studio</div>
+        <JamesNav current="speak" className="nav-links" />
+      </header>
+
+      <section className="js-chat-shell">
+        {/* keep all your existing sidebar + chat-frame markup here */}
+      </section>
+    </main>
+  );
+}
+
 
 export default function Home() {
   return (
