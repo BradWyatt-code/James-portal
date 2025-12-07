@@ -49,6 +49,13 @@ export function JamesNav({ current, className }: JamesNavProps) {
       <a href="https://clara.bw8.org" target="_blank" rel="noreferrer">
         Clara
       </a>
+
+            <span>·</span>
+
+      {/* Clara (external) */}
+      <a href="https://liang.bw8.org" target="_blank" rel="noreferrer">
+        Liang (梁美蓮)
+      </a>
     </nav>
   );
 }
