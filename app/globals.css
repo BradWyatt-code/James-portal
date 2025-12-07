@@ -452,11 +452,18 @@ main {
 /* ===== Desktop layout ===== */
 
 @media (min-width: 900px) {
-  .james-speak {
-    background-image: url("/images/pub.png");
-    background-size: cover;
-    background-position: center top; /* pull his head into frame */
+  .js-chat-log {
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, 0.78) 0,
+      rgba(0, 0, 0, 0.45) 45%,
+      transparent 80%
+    );
+    padding: 0.9rem 1rem;
+    border-radius: 1rem;
   }
+}
+
 
   .james-speak::before {
     background-position: center top;
