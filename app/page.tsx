@@ -1,15 +1,18 @@
 // app/page.tsx
 import { JamesNav } from "../components/JamesNav";
 
-
 export default function Home() {
   return (
     <main className="james-page">
       <div className="overlay" />
 
+      {/* Shared header with nav */}
+      <header className="site-header">
+        <div className="badge">BW8 STUDIO</div>
+        <JamesNav current="home" className="nav-links" />
+      </header>
 
-
-
+      {/* Hero section with portrait + text */}
       <section className="hero">
         <div className="hero-card">
           <div className="portrait-wrap">
@@ -28,13 +31,11 @@ export default function Home() {
               than medals. This portal gathers his orders, his letters, and what
               little sleep will let him remember.
             </p>
-
-          
-            </div>
           </div>
         </div>
       </section>
 
+      {/* Placeholder sections */}
       <section id="letters" className="section">
         <h3>Field Letters &amp; Fragments</h3>
         <p>
