@@ -1,181 +1,133 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { useState } from "react";
 import { JamesNav } from "../../components/JamesNav";
-
 
 type ChatMessage = {
   id: number;
-  from: 'user' | 'james';
+  sender: "user" | "james";
   text: string;
-  time: string;
 };
 
-const initialMessages: ChatMessage[] = [
-  {
-    id: 1,
-    from: 'james',
-    text: 'They sent us out again today.',
-    time: '18:41',
-  },
-  {
-    id: 2,
-    from: 'user',
-    text: 'What happened?',
-    time: '18:42',
-  },
-  {
-    id: 3,
-    from: 'james',
-    text: 'Nothing the papers will print. But my hands still smell of the powder.',
-    time: '18:44',
-  },
-];
-
-function toHistory(messages: ChatMessage[]) {
-  // only send the last 10 exchanges to keep context reasonable
-  return messages.slice(-10).map((m) => ({
-    role: m.from === 'user' ? 'user' : 'assistant',
-    content: m.text,
-  }));
-}
-
 export default function SpeakPage() {
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
-  const [input, setInput] = useState('');
-  const [isSending, setIsSending] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: 1,
+      sender: "james",
+      text: "Ah—quiet hour at last. Good evening. What weighs on your mind?",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [sending, setSending] = useState(false);
 
-  function currentTime() {
-    return new Date().toLocaleTimeString('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  }
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    const text = input.trim();
-    if (!text || isSending) return;
+  const handleSend = async () => {
+    const trimmed = input.trim();
+    if (!trimmed || sending) return;
 
     const userMsg: ChatMessage = {
       id: Date.now(),
-      from: 'user',
-      text,
-      time: currentTime(),
+      sender: "user",
+      text: trimmed,
     };
 
-    const nextMessages = [...messages, userMsg];
-    setMessages(nextMessages);
-    setInput('');
-    setIsSending(true);
+    setMessages((prev) => [...prev, userMsg]);
+    setInput("");
+    setSending(true);
 
     try {
-      const res = await fetch('/api/james-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: text,
-          history: toHistory(nextMessages),
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
-      const data = await res.json();
-      const replyText: string =
-        data.reply ?? "…silence. The line doesn't carry tonight.";
-
-      const jamesMsg: ChatMessage = {
+      // Placeholder until you wire up the real James API
+      const jamesReply: ChatMessage = {
         id: Date.now() + 1,
-        from: 'james',
-        text: replyText,
-        time: currentTime(),
+        sender: "james",
+        text:
+          "I shall answer you properly once my dispatch rider returns with the right API route. For now, imagine the scrape of a pen across this page.",
       };
 
-      setMessages((prev) => [...prev, jamesMsg]);
+      // Fake small delay so it feels conversational
+      setTimeout(() => {
+        setMessages((prev) => [...prev, jamesReply]);
+        setSending(false);
+      }, 600);
     } catch (err) {
-      console.error(err);
-      const errMsg: ChatMessage = {
-        id: Date.now() + 2,
-        from: 'james',
-        text:
-          'The connection faltered. Try again in a moment, if your patience allows.',
-        time: currentTime(),
-      };
-      setMessages((prev) => [...prev, errMsg]);
-    } finally {
-      setIsSending(false);
+      console.error("Chat error:", err);
+      setSending(false);
     }
-  }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSend();
+    }
+  };
 
   return (
-    <main className="james-speak">
-      <div className="js-overlay" />
+    <main className="james-page james-speak">
+      <div className="overlay" />
 
+      {/* Shared header with nav */}
+      <header className="site-header">
+        <div className="badge">BW8 STUDIO</div>
+        <JamesNav current="speak" className="nav-links" />
+      </header>
 
+      {/* Speak hero over the portrait background */}
+      <section className="hero">
+        <div className="hero-card speak-card">
+          <div className="hero-text">
+            <h1>Speak with James</h1>
+            <h2>Letters Unwritten, Words Unsaid</h2>
+            <p className="logline">
+              Send a line across the years. James will answer in the voice of a
+              cavalry officer haunted by Hong Kong fog, Afghan passes, and the
+              scrape of orders on his desk.
+            </p>
 
+            <div className="chat-dialogue">
+              {messages.map((m) => (
+                <p
+                  key={m.id}
+                  className={
+                    m.sender === "user" ? "message user-message" : "message james-message"
+                  }
+                >
+                  {m.text}
+                </p>
+              ))}
+              {sending && (
+                <p className="message james-message">
+                  James is composing a reply…
+                </p>
+              )}
+            </div>
 
-      <section className="js-chat-shell">
-        {/* LEFT SIDE – description (hidden on mobile via CSS) */}
-        <aside className="js-sidebar">
-          <h2>James Conquest Yarrow</h2>
-          <p>
-            A cavalry officer grown older and threadbare, sitting in a pub where the
-            noise never quite drowns out the memories. This page now lets you write
-            into the din.
-          </p>
-          <p className="js-sidebar-note">
-            James is an AI persona improvising from fragments of war, London fog,
-            and whatever you choose to send across the table.
-          </p>
-        </aside>
-
-        {/* RIGHT SIDE – chat */}
-        <div className="js-chat-frame">
-          <div className="js-chat-header">
-            <div className="js-avatar" />
-            <div className="js-chat-title">
-              <span className="js-chat-name">James</span>
-              <span className="js-chat-status">last seen… elsewhere</span>
+            <div className="chat-input-row">
+              <input
+                type="text"
+                className="chat-input"
+                placeholder="Write to James..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
+              <button
+                type="button"
+                className="portal-btn"
+                onClick={handleSend}
+                disabled={sending || !input.trim()}
+              >
+                {sending ? "Sending..." : "Send"}
+              </button>
             </div>
           </div>
-
-          <div className="js-chat-log">
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`js-msg ${
-                  msg.from === 'james' ? 'js-msg-them' : 'js-msg-me'
-                }`}
-              >
-                <p>{msg.text}</p>
-                <span className="js-msg-time">{msg.time}</span>
-              </div>
-            ))}
-          </div>
-
-          <form className="js-input-bar" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Write to James..."
-              className="js-input"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              disabled={isSending}
-            />
-            <button
-              type="submit"
-              className="js-send-btn"
-              disabled={isSending}
-            >
-              {isSending ? 'Sending…' : 'Send'}
-            </button>
-          </form>
         </div>
       </section>
+
+      <footer className="site-footer">
+        <span>&copy; {new Date().getFullYear()} BW8 Studio</span>
+        <span>·</span>
+        <span>Clara &amp; James Portal</span>
+      </footer>
     </main>
   );
 }
