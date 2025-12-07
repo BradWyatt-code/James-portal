@@ -1,47 +1,52 @@
 // components/JamesNav.tsx
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type JamesNavProps = {
-  current: "home" | "speak" | "his-story" | "letters";
   className?: string;
 };
 
-export function JamesNav({ current, className }: JamesNavProps) {
+export function JamesNav({ className = "nav-links" }: JamesNavProps) {
+  const pathname = usePathname();
+
+  const isCurrent = (paths: string | string[]) => {
+    const arr = Array.isArray(paths) ? paths : [paths];
+    return arr.includes(pathname);
+  };
+
   return (
-    <nav className={className ?? "nav-links"}>
+    <nav className={className}>
       {/* Home / James portal */}
-      {current === "home" ? (
-        <span className="current">James</span>
-      ) : (
-        <Link href="/">James</Link>
-      )}
+      {isCurrent("/")}
+        ? <span className="current">James</span>
+        : <Link href="/">James</Link>
+      }
 
       <span>·</span>
 
       {/* His Story */}
-      {current === "his-story" ? (
-        <span className="current">His Story</span>
-      ) : (
-        <Link href="/his-story">His Story</Link>
-      )}
+      {isCurrent("/his-story")
+        ? <span className="current">His Story</span>
+        : <Link href="/his-story">His Story</Link>
+      }
 
       <span>·</span>
 
       {/* Speak */}
-      {current === "speak" ? (
-        <span className="current">Speak</span>
-      ) : (
-        <Link href="/speak">Speak</Link>
-      )}
+      {isCurrent("/speak")
+        ? <span className="current">Speak</span>
+        : <Link href="/speak">Speak</Link>
+      }
 
       <span>·</span>
 
       {/* Letters */}
-      {current === "letters" ? (
-        <span className="current">Letters</span>
-      ) : (
-        <Link href="/letters">Letters</Link>
-      )}
+      {isCurrent("/letters")
+        ? <span className="current">Letters</span>
+        : <Link href="/letters">Letters</Link>
+      }
 
       <span>·</span>
 
@@ -50,9 +55,9 @@ export function JamesNav({ current, className }: JamesNavProps) {
         Clara
       </a>
 
-            <span>·</span>
+      <span>·</span>
 
-      {/* Clara (external) */}
+      {/* Liang (external) */}
       <a href="https://liang.bw8.org" target="_blank" rel="noreferrer">
         Liang (梁美蓮)
       </a>
