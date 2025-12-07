@@ -1,124 +1,123 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { JamesNav } from "../../components/JamesNav";
 
 type ChatMessage = {
-  id: number;
-  sender: "user" | "james";
+  role: "user" | "james";
   text: string;
+  time?: string;
 };
 
 export default function SpeakPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      id: 1,
-      sender: "james",
-      text: "Ah—quiet hour at last. Good evening. What weighs on your mind?",
+      role: "james",
+      text: "Ah… a quiet hour at last. Good evening. It is—how to say?—a relief, somewhat, to hear a voice unconnected to cannon fire or the restless moan of the desert wind.",
+      time: "08:37",
     },
   ]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
 
-  const handleSend = async () => {
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
     const trimmed = input.trim();
     if (!trimmed || sending) return;
 
-    const userMsg: ChatMessage = {
-      id: Date.now(),
-      sender: "user",
-      text: trimmed,
-    };
-
+    // show user message immediately
+    const userMsg: ChatMessage = { role: "user", text: trimmed };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setSending(true);
 
     try {
-      // Placeholder until you wire up the real James API
-      const jamesReply: ChatMessage = {
-        id: Date.now() + 1,
-        sender: "james",
-        text:
-          "I shall answer you properly once my dispatch rider returns with the right API route. For now, imagine the scrape of a pen across this page.",
+      const res = await fetch("/api/james-speak", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: trimmed }),
+      });
+
+      const data = await res.json();
+
+      const replyText =
+        data?.reply ||
+        "The line crackles, but I cannot quite make out your meaning. Perhaps try again, a little more plainly.";
+
+      const jamesMsg: ChatMessage = {
+        role: "james",
+        text: replyText,
       };
 
-      // Fake small delay so it feels conversational
-      setTimeout(() => {
-        setMessages((prev) => [...prev, jamesReply]);
-        setSending(false);
-      }, 600);
+      setMessages((prev) => [...prev, jamesMsg]);
     } catch (err) {
-      console.error("Chat error:", err);
+      console.error("Error talking to James API:", err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "james",
+          text: "Something went wrong with the wires. I cannot hear you clearly. We will have to blame the weather—or the Admiralty.",
+        },
+      ]);
+    } finally {
       setSending(false);
     }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSend();
-    }
-  };
+  }
 
   return (
-    <main className="james-page james-speak">
+    <main className="james-speak">
       <div className="overlay" />
 
-      {/* Shared header with nav */}
+      {/* Shared header + nav */}
       <header className="site-header">
         <div className="badge">BW8 STUDIO</div>
         <JamesNav current="speak" className="nav-links" />
       </header>
 
-      {/* Speak hero over the portrait background */}
+      {/* Speak layout */}
       <section className="hero">
-        <div className="hero-card speak-card">
-          <div className="hero-text">
-            <h1>Speak with James</h1>
-            <h2>Letters Unwritten, Words Unsaid</h2>
-            <p className="logline">
-              Send a line across the years. James will answer in the voice of a
-              cavalry officer haunted by Hong Kong fog, Afghan passes, and the
-              scrape of orders on his desk.
+        <div className="hero-card">
+          {/* Left: description card (like His Story) */}
+          <div className="speak-card-left">
+            <h1>JAMES CONQUEST YARROW</h1>
+            <h2>Letters at the pub table</h2>
+            <p>
+              A cavalry officer gone older and threadbare, sitting in a room
+              where the noise never quite drowns out the memories. This page
+              lets you write into the dim.
             </p>
+            <p>
+              James is an AI persona improvising from fragments of war, London
+              fog, and whatever you choose to send across the table.
+            </p>
+          </div>
 
+          {/* Right: chat over the portrait */}
+          <div className="speak-chat-wrap">
             <div className="chat-dialogue">
-              {messages.map((m) => (
-                <p
-                  key={m.id}
-                  className={
-                    m.sender === "user" ? "message user-message" : "message james-message"
-                  }
+              {messages.map((m, i) => (
+                <div
+                  key={i}
+                  className={`message ${m.role === "user" ? "user" : "james"}`}
                 >
-                  {m.text}
-                </p>
+                  <span className="message-text">{m.text}</span>
+                  {m.time && <span className="message-time">{m.time}</span>}
+                </div>
               ))}
-              {sending && (
-                <p className="message james-message">
-                  James is composing a reply…
-                </p>
-              )}
             </div>
 
-            <div className="chat-input-row">
+            <form className="chat-input-row" onSubmit={handleSubmit}>
               <input
                 type="text"
                 className="chat-input"
                 placeholder="Write to James..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
               />
-              <button
-                type="button"
-                className="portal-btn"
-                onClick={handleSend}
-                disabled={sending || !input.trim()}
-              >
-                {sending ? "Sending..." : "Send"}
+              <button type="submit" className="chat-send-btn" disabled={sending}>
+                {sending ? "…" : "SEND"}
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>
