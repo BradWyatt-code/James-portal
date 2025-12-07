@@ -115,17 +115,7 @@ export default function SpeakPage() {
     <main className="james-speak">
       <div className="js-overlay" />
 
-  <nav className="js-header-nav">
-    <Link href="/">Portal</Link>
-    <span>·</span>
-    <Link href="/his-story">His Story</Link>
-    <span>·</span>
-    <span>Speak</span>
-    <span>·</span>
-    <Link href="https://clara.bw8.org" target="_blank">
-      Clara
-    </Link>
-  </nav>
+
 
 
       <section className="js-chat-shell">
