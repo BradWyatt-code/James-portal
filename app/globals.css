@@ -61,41 +61,54 @@ main {
   background: radial-gradient(circle at top, transparent 0, #00000030 70%); /* Much lighter */
 }
 
+/* ======= Global header + nav ======= */
+
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.25rem;
-  background: linear-gradient(to bottom, #111013ee, #111013aa 70%, transparent);
-  backdrop-filter: blur(6px);
+  padding: 0.75rem 1.5rem;
+  font-family: "Georgia", serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 50;
 }
 
 .badge {
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #c3a870;
+  background: rgba(0, 0, 0, 0.65);
+  color: #f4e8d5;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .nav-links {
   display: flex;
+  gap: 0.75rem;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.9rem;
 }
 
-.nav-links a {
-  color: #f3e7d4;
+.nav-links a,
+.nav-links span {
+  color: #f4e8d5;
   text-decoration: none;
-  opacity: 0.85;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
 }
 
 .nav-links .current {
-  opacity: 0.5;
+  font-weight: 700;
 }
+
+
 
 .hero {
   padding: 1.5rem 1.25rem 2.5rem;
