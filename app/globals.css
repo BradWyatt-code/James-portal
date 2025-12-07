@@ -446,7 +446,7 @@ main {
   white-space: nowrap;
 }
 
-/* ===== Desktop layout ===== */
+/* ===== Desktop layout ========================== */
 
 @media (min-width: 900px) {
   .james-speak {
@@ -469,8 +469,7 @@ main {
     background-position: center top; /* or try center 15% if you want lower */
   }
 
-  /* ...rest of your existing desktop styles... */
-}
+
 
 
   .js-sidebar {
