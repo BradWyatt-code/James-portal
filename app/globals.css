@@ -217,6 +217,7 @@ main {
   }
 }
 
+
 /* ===== James Speak – shared ===== */
 
 .james-speak {
@@ -256,7 +257,7 @@ main {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at top, transparent 0, #00000015 90%); /* Very light overlay */
+  background: radial-gradient(circle at top, transparent 0, #00000015 90%);
 }
 
 /* Even lighter overlay on mobile so background is visible */
@@ -278,7 +279,7 @@ main {
     rgba(5, 4, 7, 0.4),
     rgba(5, 4, 7, 0.2),
     transparent
-  ); /* Much lighter gradient */
+  );
   backdrop-filter: blur(6px);
 }
 
@@ -327,16 +328,16 @@ main {
   width: 100%;
   max-width: 420px;
   border-radius: 1.25rem;
-  background: transparent; /* Remove opaque background */
-  border: none; /* Remove border */
-  box-shadow: none; /* Remove shadow */
+  background: transparent;
+  border: none;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .js-chat-header {
-  display: none; /* Hide the chat header with avatar */
+  display: none;
 }
 
 .js-avatar {
@@ -371,7 +372,7 @@ main {
   flex-direction: column;
   gap: 0.5rem;
   overflow-y: auto;
-  background: transparent; /* No background */
+  background: transparent;
 }
 
 .js-msg {
@@ -384,8 +385,8 @@ main {
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
-  background: transparent; /* Remove background rectangles */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Add shadow for readability */
+  background: transparent;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .js-msg p {
@@ -413,8 +414,8 @@ main {
   display: flex;
   gap: 0.5rem;
   padding: 0.55rem 0.6rem;
-  border-top: none; /* Remove border */
-  background: transparent; /* Remove background */
+  border-top: none;
+  background: transparent;
 }
 
 .js-input {
@@ -446,7 +447,6 @@ main {
   white-space: nowrap;
 }
 
-
 /* ===== Desktop layout ===== */
 
 @media (min-width: 900px) {
@@ -456,9 +456,8 @@ main {
     background-position: center top; /* pull his head into frame */
   }
 
-  /* Make sure the fade layer is aimed the same way on desktop */
   .james-speak::before {
-    background-position: center top; /* or try center 15% if you want lower */
+    background-position: center top;
   }
 
   .js-chat-shell {
@@ -469,46 +468,6 @@ main {
     justify-content: center;
     gap: 2.5rem;
   }
-
-  .js-sidebar {
-    display: block;
-    max-width: 360px;
-    padding: 1.5rem;
-    border-radius: 1.25rem;
-    background: rgba(10, 9, 11, 0.9);
-    border: 1px solid rgba(92, 77, 55, 0.9);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
-  }
-
-  .js-sidebar h2 {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    font-size: 1.25rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #c3a870;
-  }
-
-  .js-sidebar p {
-    margin: 0 0 0.75rem;
-    font-size: 0.9rem;
-    color: #e4d5c0;
-  }
-
-  .js-sidebar-note {
-    font-size: 0.8rem;
-    color: #b09a75;
-  }
-
-  .js-chat-frame {
-    max-width: 430px;
-    transform: translateY(10px);
-  }
-}
-
-
-
-
 
   .js-sidebar {
     display: block;
@@ -573,7 +532,7 @@ main {
     border-radius: 0;
     min-height: calc(100vh - 64px);
     overflow-x: hidden;
-    background: rgba(10, 9, 11, 0.75); /* Lighter so pub shows through */
+    background: rgba(10, 9, 11, 0.75);
   }
 
   .js-chat-log {
@@ -602,6 +561,8 @@ main {
     flex-shrink: 0;
   }
 }
+
+/* ===== Letters block (other page) ===== */
 
 .letters-output {
   margin-top: 1rem;
