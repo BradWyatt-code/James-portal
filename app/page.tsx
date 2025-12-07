@@ -7,10 +7,11 @@ export default function Home() {
     <main className="james-page">
       <div className="overlay" />
 
-      <header className="site-header">
-        <div className="badge">BW8 Studio</div>
-        <JamesNav current="home" className="nav-links" />
-      </header>
+<header className="site-header">
+  <div className="badge">BW8 Studio</div>
+  <JamesNav current="speak" className="nav-links" />
+</header>
+
 
       <section className="hero">
         <div className="hero-card">
