@@ -16,10 +16,12 @@ export async function POST() {
       prompt,
       size: "1024x1024", // required size
       n: 1,
-      // ❌ NO response_format here – gpt-image-1 complains about it
+      // DO NOT set response_format for gpt-image-1
     });
 
-    const imageBase64 = result.data[0].b64_json;
+    // ✅ Safe access: data might be undefined, so use optional chaining
+    const imageBase64 = result.data?.[0]?.b64_json ?? null;
+
     if (!imageBase64) {
       return NextResponse.json(
         { error: "No image data returned from model." },
