@@ -1,41 +1,52 @@
-import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
-const openai = new OpenAI({
+const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(_req: NextRequest) {
+export async function POST(_req: Request) {
   try {
-    const result = await openai.images.generate({
+    // Prompt for the pencil sketch
+    const prompt = `
+An atmospheric 19th-century pencil sketch of Hong Kong harbour,
+seen from a British army encampment around 1860:
+canvas tents, a small field desk, ships in the distance, mist and fog.
+Drawn in graphite, monochrome, with soft shading and visible pencil texture.
+`;
+
+    const result = await client.images.generate({
       model: "gpt-image-1",
-      // Tune the prompt however you like
-      prompt:
-        "A monochrome pencil sketch in the style of a 19th-century illustration, " +
-        "showing British cavalry officer James Conquest Yarrow at a small field desk " +
-        "overlooking Hong Kong harbour at dusk. Loose graphite lines, misty mountains " +
-        "and ships in the distance, no text, no frame.",
+      prompt,
       size: "1024x1024",
       n: 1,
       response_format: "b64_json",
     });
 
-    const b64 = result.data[0]?.b64_json;
+    const imageBase64 = result.data?.[0]?.b64_json;
 
-    if (!b64) {
-      return NextResponse.json(
-        { error: "No image returned from OpenAI." },
-        { status: 500 }
+    if (!imageBase64) {
+      console.error("No image returned from OpenAI", result);
+      return new Response(
+        JSON.stringify({ error: "OpenAI did not return an image." }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    // Your frontend expects { image: string }
-    return NextResponse.json({ image: b64 });
-  } catch (err) {
+    return new Response(JSON.stringify({ image: imageBase64 }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err: any) {
     console.error("James sketch API error:", err);
-    return NextResponse.json(
-      { error: "Failed to generate sketch image." },
-      { status: 500 }
-    );
+
+    const message =
+      err?.response?.data?.error?.message ||
+      err?.message ||
+      "Unknown error from OpenAI";
+
+    return new Response(JSON.stringify({ error: message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
