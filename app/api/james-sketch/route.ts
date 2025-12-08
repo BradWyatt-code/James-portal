@@ -1,52 +1,42 @@
+// app/api/james-sketch/route.ts
 import OpenAI from "openai";
+import { NextResponse } from "next/server";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(_req: Request) {
+export async function POST() {
   try {
-    // Prompt for the pencil sketch
-    const prompt = `
-An atmospheric 19th-century pencil sketch of Hong Kong harbour,
-seen from a British army encampment around 1860:
-canvas tents, a small field desk, ships in the distance, mist and fog.
-Drawn in graphite, monochrome, with soft shading and visible pencil texture.
-`;
+    const prompt =
+      "A pencil sketch in muted graphite tones, drawn in the style of a 19th century British war artist. James Conquest Yarrow, a young British cavalry officer in a simple campaign uniform, sits at a small field desk in Hong Kong around 1840, with tent canvas and harbour masts faintly suggested in the background. The style should feel like a loose, atmospheric sketch, with visible pencil strokes and paper texture.";
 
     const result = await client.images.generate({
       model: "gpt-image-1",
       prompt,
-      size: "1024x1024",
+      size: "1024x1024", // required size
       n: 1,
-      response_format: "b64_json",
+      // ❌ NO response_format here – gpt-image-1 complains about it
     });
 
-    const imageBase64 = result.data?.[0]?.b64_json;
-
+    const imageBase64 = result.data[0].b64_json;
     if (!imageBase64) {
-      console.error("No image returned from OpenAI", result);
-      return new Response(
-        JSON.stringify({ error: "OpenAI did not return an image." }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
+      return NextResponse.json(
+        { error: "No image data returned from model." },
+        { status: 500 }
       );
     }
 
-    return new Response(JSON.stringify({ image: imageBase64 }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ image: imageBase64 });
   } catch (err: any) {
-    console.error("James sketch API error:", err);
-
-    const message =
-      err?.response?.data?.error?.message ||
-      err?.message ||
-      "Unknown error from OpenAI";
-
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    console.error("James sketch error:", err?.response?.data || err);
+    return NextResponse.json(
+      {
+        error:
+          err?.response?.data?.error?.message ||
+          "Failed to generate sketch image",
+      },
+      { status: 500 }
+    );
   }
 }
