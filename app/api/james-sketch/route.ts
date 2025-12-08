@@ -1,52 +1,65 @@
 // app/api/james-sketch/route.ts
-import OpenAI from "openai";
 import { NextResponse } from "next/server";
+import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const FALLBACK_SKETCHES = [
+  "/images/james-sketch-1.png",
+  "/images/james-sketch-2.png",
+  "/images/james-sketch-3.png",
+  // add/remove as you like – just make sure the files exist in /public/images
+];
+
+function randomFallback() {
+  const choice =
+    FALLBACK_SKETCHES[Math.floor(Math.random() * FALLBACK_SKETCHES.length)];
+  // Always return something predictable, no errors
+  return NextResponse.json({
+    imageUrl: choice,
+    source: "fallback",
+  });
+}
 
 export async function POST() {
-  if (!process.env.OPENAI_API_KEY) {
-    return NextResponse.json(
-      { error: "Server is missing OPENAI_API_KEY." },
-      { status: 500 }
-    );
+  const apiKey = process.env.OPENAI_API_KEY;
+
+  // If there is no key, skip straight to fallback
+  if (!apiKey) {
+    console.warn("[james-sketch] No OPENAI_API_KEY – using fallback image.");
+    return randomFallback();
   }
+
+  const client = new OpenAI({ apiKey });
 
   try {
     const prompt =
       "A pencil sketch in muted graphite tones, drawn in the style of a 19th century British war artist. James Conquest Yarrow, a young British cavalry officer in a simple campaign uniform, sits at a small field desk in Hong Kong around 1840, with tent canvas and harbour masts faintly suggested in the background. The style should feel like a loose, atmospheric sketch, with visible pencil strokes and paper texture.";
 
     const result = await client.images.generate({
-      // This is the current DALL·E-3-generation model
-      model: "gpt-image-1",
+      model: "gpt-image-1", // or "dall-e-3" when your org actually has access
       prompt,
       size: "1024x1024",
       n: 1,
-      // no response_format here – gpt-image-1 returns base64 by default
     });
 
     const imageBase64 = result.data?.[0]?.b64_json;
 
     if (!imageBase64) {
-      console.error("James sketch: no b64_json in response", result);
-      return NextResponse.json(
-        { error: "Model returned no image data." },
-        { status: 500 }
+      console.warn(
+        "[james-sketch] OpenAI returned no b64_json, using fallback instead."
       );
+      return randomFallback();
     }
 
-    return NextResponse.json({ image: imageBase64 });
+    // Happy path: model worked, send base64
+    return NextResponse.json({
+      image: imageBase64,
+      source: "openai",
+    });
   } catch (err: any) {
-    console.error("James sketch error:", err);
-
-    const message =
-      err?.response?.data?.error?.message ??
-      err?.error?.message ??
-      err?.message ??
-      "Failed to generate sketch image";
-
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error(
+      "[james-sketch] OpenAI error, falling back to static image:",
+      err?.response?.data || err
+    );
+    return randomFallback();
   }
 }
