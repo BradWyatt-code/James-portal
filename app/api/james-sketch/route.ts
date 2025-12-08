@@ -1,47 +1,40 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
-export async function POST() {
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+export async function POST(_req: NextRequest) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json(
-        { error: "Missing OPENAI_API_KEY" },
-        { status: 500 }
-      );
-    }
-
-    const client = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
-
-    const image = await client.images.generate({
+    const result = await openai.images.generate({
       model: "gpt-image-1",
+      // Tune the prompt however you like
       prompt:
-        "Monochrome pencil sketch, 1840s engraving style, of the harbour of Hong Kong at dusk " +
-        "seen from a British military encampment. Tents, harbour waterline, sailing junks, " +
-        "mountain silhouettes in the distance, everything rendered with graphite pencil texture, " +
-        "no colour, just shading and line work.",
+        "A monochrome pencil sketch in the style of a 19th-century illustration, " +
+        "showing British cavalry officer James Conquest Yarrow at a small field desk " +
+        "overlooking Hong Kong harbour at dusk. Loose graphite lines, misty mountains " +
+        "and ships in the distance, no text, no frame.",
       size: "1024x1024",
+      n: 1,
       response_format: "b64_json",
     });
 
-    const b64 =
-      Array.isArray(image.data) && image.data.length > 0
-        ? image.data[0].b64_json
-        : undefined;
+    const b64 = result.data[0]?.b64_json;
 
     if (!b64) {
       return NextResponse.json(
-        { error: "No image data returned from model" },
+        { error: "No image returned from OpenAI." },
         { status: 500 }
       );
     }
 
+    // Your frontend expects { image: string }
     return NextResponse.json({ image: b64 });
   } catch (err) {
-    console.error("Error generating James sketch:", err);
+    console.error("James sketch API error:", err);
     return NextResponse.json(
-      { error: "Failed to generate sketch image" },
+      { error: "Failed to generate sketch image." },
       { status: 500 }
     );
   }
