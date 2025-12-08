@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {/* GLOBAL HEADER – same on every page */}
         <header className="site-header">
-          <div className="badge">BW8 Studio</div>
+          <a href="https://www.bw8.org/" className="badge">BW8 Studio</a>
           <JamesNav />
         </header>
 

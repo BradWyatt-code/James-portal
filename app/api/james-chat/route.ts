@@ -2,10 +2,6 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 // James's personality as a system prompt
 const JAMES_SYSTEM_PROMPT = `
 You are James Yarrow, a 40-year-old veteran of Britain’s imperial wars in China and Afghanistan (First Opium War and First Anglo-Afghan War), now living in Bath in December 1843 on medical leave.
@@ -48,6 +44,10 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
     const completion = await client.chat.completions.create({
       model: "gpt-4.1-mini",

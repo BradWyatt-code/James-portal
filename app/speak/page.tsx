@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { JamesNav } from "../../components/JamesNav";
 
 type ChatMessage = {
   role: "user" | "james";
@@ -32,7 +31,7 @@ export default function SpeakPage() {
     setSending(true);
 
     try {
-      const res = await fetch("/api/james-speak", {
+      const res = await fetch("/api/james-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
@@ -66,33 +65,22 @@ export default function SpeakPage() {
 
   return (
     <main className="james-speak">
-      <div className="overlay" />
+      {/* Fog overlay effect */}
+      <div className="fog-container" aria-hidden="true">
+        <div className="fog-layer fog-layer-1" />
+        <div className="fog-layer fog-layer-2" />
+      </div>
 
-      {/* Shared header + nav */}
-      <header className="site-header">
-        <div className="badge">BW8 STUDIO</div>
-        <JamesNav current="speak" className="nav-links" />
-      </header>
+      {/* Ember effects */}
+      <div className="ember-container" aria-hidden="true">
+        {[...Array(12)].map((_, i) => (
+          <div key={i} className={`ember ember-${i + 1}`} />
+        ))}
+      </div>
 
       {/* Speak layout */}
       <section className="hero">
         <div className="hero-card">
-          {/* Left: description card (like His Story) */}
-          <div className="speak-card-left">
-            <h1>JAMES CONQUEST YARROW</h1>
-            <h2>Letters at the pub table</h2>
-            <p>
-              A cavalry officer gone older and threadbare, sitting in a room
-              where the noise never quite drowns out the memories. This page
-              lets you write into the dim.
-            </p>
-            <p>
-              James is an AI persona improvising from fragments of war, London
-              fog, and whatever you choose to send across the table.
-            </p>
-          </div>
-
-          {/* Right: chat over the portrait */}
           <div className="speak-chat-wrap">
             <div className="chat-dialogue">
               {messages.map((m, i) => (

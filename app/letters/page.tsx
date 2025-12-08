@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { JamesNav } from "../../components/JamesNav";
 
 type SketchResponse = {
   image?: string;
@@ -72,13 +71,8 @@ export default function LettersPage() {
   };
 
   return (
-    <main className="james-page">
+    <main className="james-letters">
       <div className="overlay" />
-
-      <header className="site-header">
-        <div className="badge">BW8 Studio</div>
-        <JamesNav current="letters" className="nav-links" />
-      </header>
 
       <section className="hero">
         <div className="hero-card">

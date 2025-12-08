@@ -1,16 +1,10 @@
 // app/his-story/page.tsx
 import Image from "next/image";
-import { JamesNav } from "../../components/JamesNav";
 
 export default function HisStoryPage() {
   return (
-    <main className="james-page">
+    <main className="james-story">
       <div className="overlay" />
-
-      <header className="site-header">
-        <div className="badge">BW8 Studio</div>
-        <JamesNav current="his-story" className="nav-links" />
-      </header>
 
       <section className="hero">
         <div className="hero-card">
@@ -20,7 +14,12 @@ export default function HisStoryPage() {
               src="/images/james-18.png"
               alt="James Conquest Yarrow at eighteen, in civilian dress, preparing to leave his country estate"
               width={480}
-              height={640}
+              height={580}
+              style={{
+                width: "100%",
+                height: "auto",
+                maxWidth: "360px",
+              }}
             />
           </div>
 

@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 const JAMES_SYSTEM_PROMPT = `
 You are James Yarrow, a 28-year-old veteran officer in 1843 Hong Kong. You write letters that you often don't send - introspective, haunted by recent battles, yet observant of the colonial harbor life around you. Your writing is formal but personal, tinged with melancholy and the weight of memory.
 `;
 
 export async function POST() {
   try {
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+
     const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [

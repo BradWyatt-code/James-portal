@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export async function POST() {
   try {
     if (!process.env.OPENAI_API_KEY) {
@@ -13,6 +9,10 @@ export async function POST() {
         { status: 500 }
       );
     }
+
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
     const image = await client.images.generate({
       model: "gpt-image-1",

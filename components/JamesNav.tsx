@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 type JamesNavProps = {
-  current?: "home" | "speak" | "his-story" | "letters"; // <-- put this back, make it optional
+  current?: "home" | "speak" | "his-story" | "letters" | "about";
   className?: string;
 };
 
@@ -41,6 +41,15 @@ export function JamesNav({ current, className }: JamesNavProps) {
         <span className="current">Letters</span>
       ) : (
         <Link href="/letters">Letters</Link>
+      )}
+
+      <span>·</span>
+
+      {/* About */}
+      {current === "about" ? (
+        <span className="current">About</span>
+      ) : (
+        <Link href="/about">About</Link>
       )}
 
       <span>·</span>

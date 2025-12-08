@@ -1,16 +1,10 @@
 // app/page.tsx
-import { JamesNav } from "../components/JamesNav";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="james-page">
+    <main className="james-home">
       <div className="overlay" />
-
-      {/* Shared header with nav */}
-      <header className="site-header">
-        <div className="badge">BW8 STUDIO</div>
-        <JamesNav current="home" className="nav-links" />
-      </header>
 
       {/* Hero section with portrait + text */}
       <section className="hero">
@@ -31,25 +25,14 @@ export default function Home() {
               than medals. This portal gathers his orders, his letters, and what
               little sleep will let him remember.
             </p>
+
+            <div className="portal-links">
+              <Link href="/about" className="portal-btn secondary">
+                About This Portal
+              </Link>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Placeholder sections */}
-      <section id="letters" className="section">
-        <h3>Field Letters &amp; Fragments</h3>
-        <p>
-          This area will later link to his diary and dispatches—campaign notes,
-          hospital pages, and the letters he never sent.
-        </p>
-      </section>
-
-      <section id="speak" className="section">
-        <h3>Speak with James</h3>
-        <p>
-          Placeholder for a future chat interface that mirrors Clara&apos;s
-          speak page, tuned to James&apos;s fractured perspective.
-        </p>
       </section>
 
       <footer className="site-footer">
