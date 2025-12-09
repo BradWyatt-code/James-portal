@@ -32,7 +32,7 @@ export async function POST() {
 
   try {
     const prompt =
-      "A pencil sketch in muted graphite tones, drawn in the style of a 19th century British war artist. James Conquest Yarrow, a young British cavalry officer in a simple campaign uniform, sits at a small field desk in Hong Kong around 1840, with tent canvas and harbour masts faintly suggested in the background. The style should feel like a loose, atmospheric sketch, with visible pencil strokes and paper texture.";
+      "Randomly generate a pencil sketch in muted graphite tones, drawn in the style of a 19th century British war artist. Sketches of different Hong Kong 1840 subjects: Chinese junks, Chinese people in period clothing, British cavalry officers, horses, attractive Chinese women in 1840s dress, harbor scenes, etc.";
 
     const result = await client.images.generate({
       model: "gpt-image-1", // or "dall-e-3" when your org actually has access
