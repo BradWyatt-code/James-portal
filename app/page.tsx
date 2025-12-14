@@ -13,10 +13,7 @@ export default function Home() {
 
       <div className="overlay" />
 
-      <header className="site-header">
-        <div className="badge">BW8 STUDIO</div>
-        <JamesNav current="home" className="nav-links" />
-      </header>
+
 
       {/* Hero section with portrait + text */}
       <section className="hero">
