@@ -1,6 +1,5 @@
 "use client";
-
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useRef, useEffect } from "react";
 
 type ChatMessage = {
   role: "user" | "james";
@@ -12,6 +11,12 @@ export default function SpeakPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -30,18 +35,14 @@ export default function SpeakPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
       });
-
       const data = await res.json();
-
       const replyText =
         data?.reply ||
         "The line crackles, but I cannot quite make out your meaning. Perhaps try again, a little more plainly.";
-
       const jamesMsg: ChatMessage = {
         role: "james",
         text: replyText,
       };
-
       setMessages((prev) => [...prev, jamesMsg]);
     } catch (err) {
       console.error("Error talking to James API:", err);
@@ -71,6 +72,7 @@ export default function SpeakPage() {
           <div key={i} className={`ember ember-${i + 1}`} />
         ))}
       </div>
+
       {/* Smoke effects */}
       <div className="smoke-container" aria-hidden="true">
         <div className="smoke smoke-1" />
@@ -92,6 +94,8 @@ export default function SpeakPage() {
                   {m.time && <span className="message-time">{m.time}</span>}
                 </div>
               ))}
+              {/* Invisible anchor for auto-scroll */}
+              <div ref={chatEndRef} />
             </div>
 
             <form className="chat-input-row" onSubmit={handleSubmit}>
