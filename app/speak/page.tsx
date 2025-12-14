@@ -9,13 +9,7 @@ type ChatMessage = {
 };
 
 export default function SpeakPage() {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      role: "james",
-      text: "Ah… a quiet hour at last. Good evening. It is—how to say?—a relief, somewhat, to hear a voice unconnected to cannon fire or the restless moan of the desert wind.",
-      time: "08:37",
-    },
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
 
@@ -77,6 +71,12 @@ export default function SpeakPage() {
           <div key={i} className={`ember ember-${i + 1}`} />
         ))}
       </div>
+      {/* Smoke effects */}
+      <div className="smoke-container" aria-hidden="true">
+        <div className="smoke smoke-1" />
+        <div className="smoke smoke-2" />
+        <div className="smoke smoke-3" />
+      </div>
 
       {/* Speak layout */}
       <section className="hero">
@@ -98,7 +98,7 @@ export default function SpeakPage() {
               <input
                 type="text"
                 className="chat-input"
-                placeholder="Write to James..."
+                placeholder="Buy James a drink..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />

@@ -7,7 +7,7 @@ import JamesHeroAnimations from "../components/JamesHeroAnimations";
 
 export default function Home() {
   return (
-    <main className="james-page">
+    <main className="james-home">
       {/* GSAP-driven subtle animations for hero + background */}
       <JamesHeroAnimations />
 
