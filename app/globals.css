@@ -1046,12 +1046,7 @@ main {
   overflow: hidden;
 }
 
-/* Make James's chat bed wider on desktop */
-@media (min-width: 900px) {
-  .speak-chat-wrap {
-    max-width: 750px;      /* about 50% wider than 500px */
-  }
-}
+
 
 
 @media (max-width: 899px) {
