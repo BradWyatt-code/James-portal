@@ -1036,7 +1036,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
+  max-width: 750px;
   margin: 0 auto;
   height: calc(100vh - 10rem);
   min-height: 400px;
