@@ -895,10 +895,6 @@ main {
     background-image: url("/images/pub-mobile.png");
   }
 
-  .james-speak::before {
-    display: none;
-  }
-
   .js-chat-shell {
     flex: 1;
     padding: 0;
