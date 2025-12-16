@@ -898,8 +898,15 @@ main {
     width: 100vw;
     max-width: 100vw;
     overflow-x: hidden;
+    background-image: url("/images/pub-mobile.png"); /* Mobile background */
   }
 
+  /* Hide the james-pub.png overlay on mobile */
+  .james-speak::before {
+    display: none;
+  }
+  
+  /* Rest of existing mobile styles... */
   .js-chat-shell {
     flex: 1;
     padding: 0;
@@ -908,6 +915,8 @@ main {
     max-width: 100vw;
     overflow-x: hidden;
   }
+  /* etc... */
+}
 
   .js-chat-frame {
     margin: 0;
